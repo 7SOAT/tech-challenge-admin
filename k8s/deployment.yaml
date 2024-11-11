@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-challenge-monolith
+  labels:
+    app: tech-challenge-monolith
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tech-challenge-monolith
+  template:
+    metadata:
+      labels:
+        app: tech-challenge-monolith
+    spec:
+      containers:
+        - name: tech-challenge-monolith
+          image: luizpainodev/tech-challenge-monolith:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: CONFIG_FILE
+              value: "/app/config/config.yaml"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+              subPath: config.yaml
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+      volumes:
+        - name: config-volume
+          configMap:
+            name: tech-challenge-config
