@@ -1,11 +1,10 @@
-
-import ProductRepository from "@datasource/typeorm/repositories/product.repository";
-import IProductGateway from "@interfaces/datasource/product.gateway";
-import ProductModel from "@models/product.model";
 import { plainToInstance } from "class-transformer";
-import ProductEntity from "core/entities/product.entity";
-import ProductCategory from "core/enums/product-category.enum";
+import ProductEntity from "../../core/entities/product.entity";
+import ProductCategory from "../../core/enums/product-category.enum";
 import { UUID } from 'crypto';
+import ProductModel from "../../package/models/product.model";
+import ProductRepository from "../../externals/datasource/typeorm/repositories/product.repository";
+import IProductGateway from "../../package/interfaces/datasource/product.gateway";
 
 export default class ProductGateway implements IProductGateway {
   constructor(

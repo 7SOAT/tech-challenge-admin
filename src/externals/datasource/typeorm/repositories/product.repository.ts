@@ -1,5 +1,4 @@
-
-import ProductModel from "@models/product.model";
+import ProductModel from "../../../../package/models/product.model";
 import { InjectRepository } from "@nestjs/typeorm";
 import ProductCategory from "core/enums/product-category.enum";
 import { UUID } from 'crypto';
@@ -24,7 +23,7 @@ export default class ProductRepository {
   ): Promise<ProductModel[]> {
     return await this._productRepository.findBy({ category });
   }
-  
+
   async insert(product: ProductModel): Promise<ProductModel> {
     return await this._productRepository.save(product);
   }

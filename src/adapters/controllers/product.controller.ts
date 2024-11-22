@@ -1,13 +1,15 @@
-import CreateProductDto from '@api/dtos/product/create-product.dto';
-import UpdateProductBodyDto from '@api/dtos/product/update-product.dto';
-import ProductRepository from '@datasource/typeorm/repositories/product.repository';
-import ProductGateway from '@gateways/product.gateway';
-import ProductUseCase from '@usecases/product.usecase';
-import ProductPresenter from 'adapters/presenters/product.presenter';
-import ProductEntity from 'core/entities/product.entity';
-import ProductCategory from 'core/enums/product-category.enum';
+import { Controller } from '@nestjs/common';
+import CreateProductDto from '../../api/dtos/product/create-product.dto';
+import UpdateProductBodyDto from '../../api/dtos/product/update-product.dto';
+import ProductRepository from "../../externals/datasource/typeorm/repositories/product.repository";
+import ProductPresenter from '../../adapters/presenters/product.presenter';
+import ProductEntity from '../../core/entities/product.entity';
+import ProductCategory from '../../core/enums/product-category.enum';
+import ProductUseCase from "../../core/usecases/product.usecase";
+import ProductGateway from "../gateways/product.gateway";
 import { UUID } from 'crypto';
 
+@Controller('products')
 export default class ProductController {
   private readonly _productGateway = new ProductGateway(
     this._productRepository

@@ -1,7 +1,7 @@
-import ProductEntity from "@entities/product.entity";
-import ProductCategory from "@enums/product-category.enum";
-import IProductGateway from "@interfaces/datasource/product.gateway";
 import { UUID } from "crypto";
+import IProductGateway from "../../package/interfaces/datasource/product.gateway";
+import ProductEntity from "../entities/product.entity";
+import ProductCategory from "../enums/product-category.enum";
 
 export default class ProductUseCase {
   constructor(private _productGateway: IProductGateway) { }
@@ -31,7 +31,7 @@ export default class ProductUseCase {
   }
 
   async deleteProduct(id: UUID): Promise<void> {
-    await this._productGateway.delete(id);    
+    await this._productGateway.delete(id);
   }
 
   async createProduct(product: ProductEntity): Promise<ProductEntity> {

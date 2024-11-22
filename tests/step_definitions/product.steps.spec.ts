@@ -1,40 +1,23 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
-import * as request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { INestApplication } from '@nestjs/common';
-import ProductController from '../../src/adapters/controllers/product.controller';
-import { JwtService } from '@nestjs/jwt';
-import { AdminGuard } from '@api/validators/admin-guard';
+import * as request from 'supertest';
+import ProductRepository from "../../src/externals/datasource/typeorm/repositories/product.repository";
+import ProductController from "../../src/adapters/controllers/product.controller";
+import ProductModel from "../../src/package/models/product.model";
 
-const feature = loadFeature('tests/features/product.feature');
+const feature = loadFeature('./tests/features/product.feature');
 
 defineFeature(feature, (test) => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [TypeOrmModule.forFeature([ProductModel])],
       controllers: [ProductController],
-      providers: [
-        {
-          provide: JwtService,
-          useValue: {
-            verify: jest.fn().mockImplementation((token) => {
-              if (token === 'valid-admin-token') return { isAdmin: true };
-              throw new Error('Invalid token');
-            }),
-          },
-        },
-      ],
-    })
-      .overrideGuard(AdminGuard)
-      .useValue({
-        canActivate: (context) => {
-          const request = context.switchToHttp().getRequest();
-          request.user = { isAdmin: true };
-          return true;
-        },
-      })
-      .compile();
+      providers: [ProductRepository],
+    }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
@@ -53,15 +36,14 @@ defineFeature(feature, (test) => {
     when('I request the "GET /products" endpoint', async () => {
       response = await request(app.getHttpServer())
         .get('/products')
-        .set('Authorization', 'Bearer valid-admin-token');
     });
 
     then('the response status code should be 200', () => {
       expect(response.status).toBe(200);
     });
 
-    then('the response should contain "This action returns all products"', () => {
-      expect(response.text).toBe('This action returns all products');
+    then('the response should contain a list of products', () => {
+      expect(response.body).toEqual(expect.any(Array));
     });
   });
 

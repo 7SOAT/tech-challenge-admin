@@ -4,7 +4,7 @@ Feature: Product API
     Given I am an authorized admin
     When I request the "GET /products" endpoint
     Then the response status code should be 200
-    And the response should contain "This action returns all products"
+    And the response should contain a list of products
 
   Scenario: Accessing the products endpoint without a token
     Given I do not provide a token
