@@ -11,12 +11,13 @@ import PaymentRoute from "./payment/payment.route";
 import PaymentProvider from "@providers/mercado-pago/mercado-pago.provider";
 import PaymentProviderGateway from "@gateways/payment-provider.gateway";
 import ProvidersModule from "@providers/providers.module";
+import { JwtModule } from "@nestjs/jwt";
 
 export default class RoutesModule {
     static resgister(): DynamicModule {
         return {
             module: this,
-            imports: [TerminusModule, HttpModule, RepositoriesModule.resgister(), ProvidersModule.register()],
+            imports: [TerminusModule, HttpModule, RepositoriesModule.resgister(), ProvidersModule.register(), JwtModule],
             providers: [
                 EnvironmentConfigService,
                 PaymentProvider,

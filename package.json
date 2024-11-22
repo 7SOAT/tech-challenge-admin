@@ -28,6 +28,7 @@
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.0",
     "@nestjs/event-emitter": "^2.0.4",
+    "@nestjs/jwt": "^10.2.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.3.1",
@@ -51,6 +52,7 @@
     "@types/node": "^20.3.1",
     "@types/supertest": "^6.0.0",
     "jest": "^29.5.0",
+    "jest-cucumber": "^4.5.0",
     "source-map-support": "^0.5.21",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
@@ -65,7 +67,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": "tests",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -74,6 +76,21 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@api/(.*)$": "<rootDir>/../src/api/$1",
+      "^@routes/(.*)$": "<rootDir>/../src/api/routes/$1",
+      "^@gateways/(.*)$": "<rootDir>/../src/adapters/gateways/$1",
+      "^@usecases/(.*)$": "<rootDir>/../src/core/usecases/$1",
+      "^@entities/(.*)$": "<rootDir>/../src/core/entities/$1",
+      "^@enums/(.*)$": "<rootDir>/../src/core/enums/$1",
+      "^@interfaces/(.*)$": "<rootDir>/../src/package/interfaces/$1",
+      "^@type/(.*)$": "<rootDir>/../src/core/types/$1",
+      "^@datasource/(.*)$": "<rootDir>/../src/externals/datasource/$1",
+      "^@providers/(.*)$": "<rootDir>/../src/externals/providers/$1",
+      "^@config/(.*)$": "<rootDir>/../src/api/config/$1",
+      "^@models/(.*)$": "<rootDir>/../src/package/models/$1",
+      "^@repositories/(.*)$": "<rootDir>/../src/externals/datasource/typeorm/repositories/$1"
+    }
   }
 }

@@ -12,20 +12,21 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
   HttpException,
   HttpStatus,
   Param,
   Post,
-  Put,
+  Put, UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import ProductController from 'adapters/controllers/product.controller';
 import ProductEntity from 'core/entities/product.entity';
 import { UUID } from 'crypto';
+import {AdminGuard} from "@api/validators/admin-guard";
 
 @ApiTags('products')
 @Controller('products')
+@UseGuards(AdminGuard)
 export default class ProductRoute {
   private readonly _productController = new ProductController(
     this._productRepository
@@ -61,7 +62,7 @@ export default class ProductRoute {
   @Get('/by-category/:productCategory')
   @FindProductsByCategorySwaggerConfig()
   async findByCategory(
-    @Param('productCategory') category
+    {category}: { category: any }
   ): Promise<ProductEntity[]> {
     try {
       return await this._productController.findProductsByCategory(category);

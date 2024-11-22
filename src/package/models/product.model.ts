@@ -21,5 +21,5 @@ export default class ProductModel extends BaseModel<ProductModel> {
   price: number;
 
   @Column({ type: "varchar", length: 1000 })
-  description: string;  
+  description: string;
 }
