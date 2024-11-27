@@ -1,4 +1,4 @@
-import ProductCategory from '@enums/product-category.enum';
+import ProductCategory from "../../core/enums/product-category.enum";
 import { UUID } from 'crypto';
 import { Column, Entity, PrimaryColumn } from "typeorm";
 import BaseModel from './base.model';
@@ -21,5 +21,5 @@ export default class ProductModel extends BaseModel<ProductModel> {
   price: number;
 
   @Column({ type: "varchar", length: 1000 })
-  description: string;  
+  description: string;
 }

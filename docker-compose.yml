@@ -14,19 +14,19 @@ services:
       - "3000"
     environment:
       API_PORT: 3000
-      POSTGRES__HOST: dpg-cqd4stmehbks73bpl570-a.oregon-postgres.render.com
-      POSTGRES__PORT: 5432
-      POSTGRES__USER: secretuser
-      POSTGRES__PASSWORD: meZxka6zIaROJ1lJQ27jFEhGJVZE8tgv
-      POSTGRES__DATABASE: fiaptech
-      ENABLE_MOCK_TABLES: false
-      MERCADO_PAGO__EXTERNAL_CAIXA_ID: CAIXAEID
-      MERCADO_PAGO__VENDEDOR_USER_ID: 1910982443
-      MERCADO_PAGO__SPONSOR_USER_ID: 1907353240
-      MERCADO_PAGO__ACCESS_TOKEN: APP_USR-5504098690787496-073020-6da0ebc9754ae0fd13bc293c45aa33d2-1910982443
-      MERCADO_PAGO__BASE_URL: https://api.mercadopago.com
-      MERCADO_PAGO__API_VERSION: v1
-      MERCADO_PAGO__NOTIFICATION_URL: https://tech-challenge-monolith.onrender.com/webhook
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: secretuser
+      POSTGRES_PASSWORD: passwordmostsecret
+      POSTGRES_DATABASE: fiaptech
+      ENABLE_MOCK_TABLES: true
+      MERCADO_PAGO_EXTERNAL_CAIXA_ID: CAIXAEID
+      MERCADO_PAGO_VENDEDOR_USER_ID: 1910982443
+      MERCADO_PAGO_SPONSOR_USER_ID: 1907353240
+      MERCADO_PAGO_ACCESS_TOKEN: APP_USR-5504098690787496-073020-6da0ebc9754ae0fd13bc293c45aa33d2-1910982443
+      MERCADO_PAGO_BASE_URL: https://api.mercadopago.com
+      MERCADO_PAGO_API_VERSION: v1
+      MERCADO_PAGO_NOTIFICATION_URL: https://tech-challenge-monolith.onrender.com/webhook
     ports:
       - "3000:3000"
     depends_on:

@@ -1,6 +1,6 @@
+import ProductDto from '../../api/dtos/product/output/product.dto';
+import ProductEntity from "../../core/entities/product.entity";
 
-import ProductDto from '@api/dtos/product/output/product.dto';
-import ProductEntity from '@entities/product.entity';
 
 class ProductPresenter {
   static PresentOne(product: ProductEntity): ProductDto {

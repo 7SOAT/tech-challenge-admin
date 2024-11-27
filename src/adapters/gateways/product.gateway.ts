@@ -1,11 +1,10 @@
-
-import ProductRepository from "@datasource/typeorm/repositories/product.repository";
-import IProductGateway from "@interfaces/datasource/product.gateway";
-import ProductModel from "@models/product.model";
 import { plainToInstance } from "class-transformer";
-import ProductEntity from "core/entities/product.entity";
-import ProductCategory from "core/enums/product-category.enum";
+import ProductEntity from "../../core/entities/product.entity";
+import ProductCategory from "../../core/enums/product-category.enum";
 import { UUID } from 'crypto';
+import ProductModel from "../../package/models/product.model";
+import ProductRepository from "../../externals/datasource/typeorm/repositories/product.repository";
+import IProductGateway from "../../package/interfaces/datasource/product.gateway";
 
 export default class ProductGateway implements IProductGateway {
   constructor(
@@ -48,10 +47,10 @@ export default class ProductGateway implements IProductGateway {
 
     return mappedProducts;
   }
-  
+
   async insert(product: ProductEntity): Promise<ProductEntity> {
     const mappedProduct = this.adaptEntityToModel(product);
-    
+
     const result = await this._productRepository.insert(mappedProduct);
 
     return this.adaptModelToEntity(result);
@@ -59,11 +58,11 @@ export default class ProductGateway implements IProductGateway {
 
   async update(id: UUID, product: ProductEntity): Promise<void> {
     const mappedProduct = plainToInstance<ProductModel, ProductEntity>(
-      ProductModel, 
+      ProductModel,
       product,
       {enableImplicitConversion: true}
     );
-    const result = await this._productRepository.update(id, mappedProduct);    
+    const result = await this._productRepository.update(id, mappedProduct);
   }
 
   async delete(id: UUID): Promise<void> {
@@ -97,7 +96,7 @@ export default class ProductGateway implements IProductGateway {
       id
     } = productM;
 
-    return new ProductEntity(      
+    return new ProductEntity(
       name,
       description,
       price,
