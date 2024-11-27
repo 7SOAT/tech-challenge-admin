@@ -1,12 +1,12 @@
-Feature: Product API
+Feature: Managing Products
 
-  Scenario: Accessing the products endpoint as an admin
+  Scenario: Admin accesses products endpoint
     Given I am an authorized admin
     When I request the "GET /products" endpoint
     Then the response status code should be 200
     And the response should contain a list of products
 
-  Scenario: Accessing the products endpoint without a token
+  Scenario: Accessing products endpoint without token
     Given I do not provide a token
     When I request the "GET /products" endpoint
     Then the response status code should be 401

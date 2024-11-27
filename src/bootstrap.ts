@@ -26,8 +26,15 @@ export default async function bootstrap(): Promise<void> {
   const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document);
 
-  await app.listen(apiConfig.getApiPort());
-  
+  const port = apiConfig.getApiPort() || 3001;
+
+  try {
+    await app.listen(port);
+    console.log(`Application is running on: http://localhost:${port}`);
+  } catch (error) {
+    console.error(`Error while starting server on port ${port}:`, error);
+  }
+
   const enableMockTables: boolean = databaseConfig.getEnableMockTables();
   await MockTables(app, enableMockTables);
 }

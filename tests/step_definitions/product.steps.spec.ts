@@ -1,68 +1,67 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import ProductRepository from "../../src/externals/datasource/typeorm/repositories/product.repository";
-import ProductController from "../../src/adapters/controllers/product.controller";
-import ProductModel from "../../src/package/models/product.model";
+import { TestModule } from '@datasource/typeorm/typeormconfig.module';
 
 const feature = loadFeature('./tests/features/product.feature');
 
+const initializeTestApp = async (): Promise<INestApplication> => {
+  const moduleFixture: TestingModule = await Test.createTestingModule({
+    imports: [TestModule],
+  }).compile();
+
+  const app = moduleFixture.createNestApplication();
+  await app.init();
+  return app;
+};
+
 defineFeature(feature, (test) => {
   let app: INestApplication;
+  let responseWithToken: request.Response;
+  let responseWithoutToken: request.Response;
 
   beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [TypeOrmModule.forFeature([ProductModel])],
-      controllers: [ProductController],
-      providers: [ProductRepository],
-    }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    app = await initializeTestApp();
   });
 
   afterAll(async () => {
     await app.close();
   });
 
-  test('Accessing the products endpoint as an admin', ({ given, when, then }) => {
-    let response: request.Response;
-
+  test('Admin accesses products endpoint', ({ given, when, then, and }) => {
     given('I am an authorized admin', () => {
+      // Precondições podem ser configuradas aqui se necessário.
     });
 
     when('I request the "GET /products" endpoint', async () => {
-      response = await request(app.getHttpServer())
-        .get('/products')
+      responseWithToken = await request(app.getHttpServer()).get('/products');
     });
 
     then('the response status code should be 200', () => {
-      expect(response.status).toBe(200);
+      expect(responseWithToken.status).toBe(200);
     });
 
-    then('the response should contain a list of products', () => {
-      expect(response.body).toEqual(expect.any(Array));
+    and('the response should contain a list of products', () => {
+      expect(responseWithToken.body).toEqual(expect.any(Array));
     });
   });
 
-  test('Accessing the products endpoint without a token', ({ given, when, then }) => {
-    let response: request.Response;
-
+  test('Accessing products endpoint without token', ({ given, when, then, and }) => {
     given('I do not provide a token', () => {
+      // Precondições podem ser configuradas aqui se necessário.
     });
 
     when('I request the "GET /products" endpoint', async () => {
-      response = await request(app.getHttpServer()).get('/products');
+      responseWithoutToken = await request(app.getHttpServer()).get('/products');
     });
 
     then('the response status code should be 401', () => {
-      expect(response.status).toBe(401);
+      expect(responseWithoutToken.status).toBe(401);
     });
 
-    then('the response should contain "Authorization header not found"', () => {
-      expect(response.body.message).toBe('Authorization header not found');
+    and('the response should contain "Authorization header not found"', () => {
+      expect(responseWithoutToken.body.message).toBe('Authorization header not found');
     });
   });
 });
