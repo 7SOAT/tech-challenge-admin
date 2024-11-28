@@ -16,7 +16,8 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put, UseGuards,
+  Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import ProductController from 'adapters/controllers/product.controller';

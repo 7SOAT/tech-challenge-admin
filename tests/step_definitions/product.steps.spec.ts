@@ -31,7 +31,6 @@ defineFeature(feature, (test) => {
 
   test('Admin accesses products endpoint', ({ given, when, then, and }) => {
     given('I am an authorized admin', () => {
-      // Precondições podem ser configuradas aqui se necessário.
     });
 
     when('I request the "GET /products" endpoint', async () => {
@@ -49,7 +48,6 @@ defineFeature(feature, (test) => {
 
   test('Accessing products endpoint without token', ({ given, when, then, and }) => {
     given('I do not provide a token', () => {
-      // Precondições podem ser configuradas aqui se necessário.
     });
 
     when('I request the "GET /products" endpoint', async () => {
