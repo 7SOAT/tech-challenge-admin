@@ -1,10 +1,9 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, ForbiddenException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-
+import { decodeJwt } from 'jose'
 @Injectable()
+
 export class AdminGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
 
   canActivate(context: ExecutionContext): boolean {
     const request: Request = context.switchToHttp().getRequest();
@@ -19,7 +18,7 @@ export class AdminGuard implements CanActivate {
     }
 
     try {
-      const payload = this.jwtService.verify(bearerToken);
+      const payload = decodeJwt(bearerToken);
       if (!payload.isAdmin) {
         throw new ForbiddenException('You do not have permission to access this resource');
       }
