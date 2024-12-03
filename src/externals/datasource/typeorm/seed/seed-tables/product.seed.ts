@@ -1,5 +1,5 @@
-import ProductCategory from "core/enums/product-category.enum";
-import ProductEntity from "core/entities/product.entity";
+import ProductCategory from "../../../../../core/enums/product-category.enum";
+import ProductEntity from "../../../../../core/entities/product.entity";
 import ProductModel from "@models/product.model";
 
 const ProductMockList: ProductEntity[] = [

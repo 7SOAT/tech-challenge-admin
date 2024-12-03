@@ -11,27 +11,22 @@ export default class EnvironmentConfigService implements DatabaseConfig{
   }
 
   public getDatabaseHost(): string {
-    console.log(this.configService.get<string>('POSTGRES_HOST'))
     return this.configService.get<string>('POSTGRES_HOST');
   }
 
   public getDatabasePort(): number {
-    console.log(this.configService.get<number>('POSTGRES_PORT'))
     return this.configService.get<number>('POSTGRES_PORT');
   }
 
   public getDatabaseUser(): string {
-    console.log(this.configService.get<string>('POSTGRES_USER'))
     return this.configService.get<string>('POSTGRES_USER');
   }
 
   public getDatabasePassword(): string {
-    console.log(this.configService.get<string>('POSTGRES_PASSWORD'))
     return this.configService.get<string>('POSTGRES_PASSWORD');
   }
 
   public getDatabaseName(): string {
-    console.log(this.configService.get<string>('POSTGRES_DATABASE'))
     return this.configService.get<string>('POSTGRES_DATABASE');
   }
 
