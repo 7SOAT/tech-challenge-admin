@@ -12,7 +12,7 @@ import Product from "../../../core/entities/product.entity";
     TypeOrmModule.forFeature([Product]),
   ],
   controllers: [ProductController],
-  providers: [ProductModel, ProductRepository],
+  providers: [ProductModel, ProductRepository, ProductController],
   exports: [ProductModel],
 })
 export class TestModule {}

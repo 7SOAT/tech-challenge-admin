@@ -7,7 +7,14 @@ const config = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   collectCoverageFrom: ['src/**/*.(t|j)s'],
-  coveragePathIgnorePatterns: ['/node_modules/', '/src/api/config/swagger/product'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/src/api/config',
+    '/src/app.module.ts',
+    '/src/bootstrap.ts',
+    '/src/main.ts',
+    '/src/api/dtos',
+  ],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
   moduleNameMapper: {
