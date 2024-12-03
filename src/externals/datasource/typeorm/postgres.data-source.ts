@@ -4,11 +4,11 @@ import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 export const postgresDataSource = (config: EnvironmentConfigService): TypeOrmModuleOptions =>
   ({
     type: "postgres",
-    host: config.getDatabaseHost(),
-    port: config.getDatabasePort() || 5432,
-    username: config.getDatabaseUser(),
-    password: config.getDatabasePassword(),
-    database: config.getDatabaseName(),
+    host: "localhost",
+    port: 5432,
+    username: "secretuser",
+    password: "passwordmostsecret",
+    database: "fiaptech",
     synchronize: true,
     entities: [__dirname + "..\\models\\*.model.ts"],
     ssl: false,

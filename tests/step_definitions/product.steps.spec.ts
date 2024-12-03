@@ -2,35 +2,20 @@ import { defineFeature, loadFeature } from 'jest-cucumber';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { TestModule } from '@datasource/typeorm/typeormconfig.module';
-import ProductRepository from '../../src/externals/datasource/typeorm/repositories/product.repository'
+import { TestModule } from '../../src/externals/datasource/typeorm/typeormconfig.module';
+import ProductRepository from '../../src/externals/datasource/typeorm/repositories/product.repository';
 import ProductsMock from '../../src/externals/datasource/typeorm/seed/seed-tables/product.seed';
 
 const feature = loadFeature('./tests/features/product.feature');
 jest.setTimeout(30000);
 
-
 const mockProductRepository = {
   findAll: jest.fn().mockResolvedValue(ProductsMock),
-  findOneById: jest.fn().mockImplementation((id) =>
-    Promise.resolve(ProductsMock.find((product) => product.id === id)),
-  ),
-  findByCategory: jest.fn().mockImplementation((category) =>
-    Promise.resolve(ProductsMock.filter((product) => product.category === category)),
-  ),
-  insert: jest.fn().mockImplementation((product) => {
-    ProductsMock.push(product);
-    return Promise.resolve(product);
-  }),
+  findOneById: jest.fn().mockResolvedValue(ProductsMock[0]),
+  findByCategory: jest.fn().mockResolvedValue([]),
+  insert: jest.fn().mockResolvedValue(ProductsMock[0]),
   update: jest.fn().mockResolvedValue(1),
-  delete: jest.fn().mockImplementation((id) => {
-    const index = ProductsMock.findIndex((product) => product.id === id);
-    if (index !== -1) {
-      ProductsMock.splice(index, 1);
-      return Promise.resolve(1);
-    }
-    return Promise.resolve(0);
-  }),
+  delete: jest.fn().mockResolvedValue(1),
 };
 
 const initializeTestApp = async (): Promise<INestApplication> => {
@@ -66,7 +51,9 @@ defineFeature(feature, (test) => {
     });
 
     when('I request the "GET /products" endpoint', async () => {
-      responseWithToken = await request(app.getHttpServer()).get('/products');
+      responseWithToken = await request(app.getHttpServer())
+        .get('/products')
+        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhNDE4MjQ1OC04MDQxLTcwMjEtZTIyNi0wYTJiMGYwN2E5ZDYiLCJjcGYiOiJ0ZWNoLWNoYWxsZW5nZS1vcmRlciIsImlzQWRtaW4iOnRydWUsImlhdCI6MTczMjg0MDE0NCwiZXhwIjoxNzMyODQzNzQ0fQ.h8AO2ut9tTPwHvnB97yLYGPmSQpZaj4i_iOBZUxmibM');
     });
 
     then('the response status code should be 200', () => {

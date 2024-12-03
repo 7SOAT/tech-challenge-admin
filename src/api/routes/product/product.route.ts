@@ -23,7 +23,7 @@ import { ApiTags } from '@nestjs/swagger';
 import ProductController from 'adapters/controllers/product.controller';
 import ProductEntity from 'core/entities/product.entity';
 import { UUID } from 'crypto';
-import {AdminGuard} from "@api/validators/admin-guard";
+import {AdminGuard} from "../../../api/validators/admin-guard";
 
 @ApiTags('products')
 @Controller('products')

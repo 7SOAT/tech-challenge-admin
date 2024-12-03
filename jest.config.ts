@@ -1,12 +1,13 @@
 /** @type {import('@jest/types').Config.InitialOptions} */
 const config = {
   moduleFileExtensions: ['js', 'json', 'ts'],
-  rootDir: 'tests',
+  rootDir: '.',
   testRegex: '.*\\.spec\\.ts$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  collectCoverageFrom: ['**/*.(t|j)s'],
+  collectCoverageFrom: ['src/**/*.(t|j)s'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/src/api/config/swagger/product'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
   moduleNameMapper: {

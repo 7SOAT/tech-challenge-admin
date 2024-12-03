@@ -1,7 +1,7 @@
-import { AtLeastOneField } from "@api/validators/at-least-one-field.validator";
+import { AtLeastOneField } from "../../../api/validators/at-least-one-field.validator";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional } from "class-validator";
-import ProductCategory from "core/enums/product-category.enum";
+import ProductCategory from "../../../core/enums/product-category.enum";
 
 @AtLeastOneField()
 export default class UpdateProductDto {
