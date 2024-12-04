@@ -1,5 +1,5 @@
 import { INestApplication } from "@nestjs/common";
-import ProductsMock from "@datasource/typeorm/seed/seed-tables/product.seed";
+import ProductsMock from "../../../datasource/typeorm/seed/seed-tables/product.seed";
 import ProductRepository from "../repositories/product.repository";
 
 export default async function MockTables(app: INestApplication<any>, enableMockTables: boolean) {
