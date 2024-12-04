@@ -1,4 +1,4 @@
-import ProductCategory from "@enums/product-category.enum";
+import ProductCategory from "../../../../core/enums/product-category.enum";
 import { UUID } from "crypto";
 
 export default class OrderProductDto {
@@ -8,5 +8,5 @@ export default class OrderProductDto {
         public price: number,
         public description: string,
         public category: ProductCategory
-    ){}    
+    ){}
 }
