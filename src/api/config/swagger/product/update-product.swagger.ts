@@ -1,6 +1,5 @@
-import { UUIDParamDto } from '@api/dtos/identificator.dto';
-import UpdateProductBodyDto from '@api/dtos/product/update-product.dto';
-import ProductCategory from '@enums/product-category.enum';
+import UpdateProductBodyDto from '../../../../api/dtos/product/update-product.dto';
+import ProductCategory from '../../../../core/enums/product-category.enum';
 import { applyDecorators, HttpStatus } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 

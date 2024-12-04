@@ -13,12 +13,7 @@ import { UUID } from 'crypto';
 @Controller('products')
 @UseGuards(AdminGuard)
 export default class ProductController {
-  private readonly _productGateway = new ProductGateway(
-    this._productRepository
-  );
-  private readonly _productUseCase = new ProductUseCase(this._productGateway);
-
-  constructor(private _productRepository: ProductRepository) {}
+  constructor(private _productUseCase: ProductUseCase) {}
 
   @Get()
   async findAllProducts(): Promise<ProductEntity[]> {

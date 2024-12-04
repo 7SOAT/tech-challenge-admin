@@ -2,8 +2,8 @@ import { HttpModule } from "@nestjs/axios";
 import { DynamicModule } from "@nestjs/common";
 import { TerminusModule } from "@nestjs/terminus";
 import EnvironmentConfigService from "api/config/environment-config/environment-config.service";
-import ProductRoute from "@routes/product/product.route";
-import RepositoriesModule from "@datasource/typeorm/repositories/repositories.module";
+import ProductRoute from "../routes/product/product.route";
+import RepositoriesModule from "../../externals/datasource/typeorm/repositories/repositories.module";
 import { JwtModule } from "@nestjs/jwt";
 
 export default class RoutesModule {

@@ -1,4 +1,4 @@
-import ProductCategory from '@enums/product-category.enum';
+import ProductCategory from '../../../../core/enums/product-category.enum';
 import { applyDecorators, HttpStatus } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 

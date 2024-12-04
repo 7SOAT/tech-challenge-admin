@@ -1,5 +1,5 @@
-import CreateProductDto from '@api/dtos/product/create-product.dto';
-import ProductsMock from '@datasource/typeorm/seed/seed-tables/product.seed';
+import CreateProductDto from '../../../../api/dtos/product/create-product.dto';
+import ProductsMock from '../../../../externals/datasource/typeorm/seed/seed-tables/product.seed';
 import { applyDecorators, HttpStatus } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 

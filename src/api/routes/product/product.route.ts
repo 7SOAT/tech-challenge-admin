@@ -1,12 +1,12 @@
-import CreateProductDto from '@api/dtos/product/create-product.dto';
-import UpdateProductBodyDto from '@api/dtos/product/update-product.dto';
-import { CreateProductSwaggerConfig } from '@api/config/swagger/product/create-product.swagger';
-import { DeleteProductSwaggerConfig } from '@api/config/swagger/product/delete-product.swagger';
-import { FindAllProductsSwaggerConfig } from '@api/config/swagger/product/find-all-products.swagger';
-import { FindProductByIdSwaggerConfig } from '@api/config/swagger/product/find-product-by-id.swagger';
-import { FindProductsByCategorySwaggerConfig } from '@api/config/swagger/product/find-products-by-category.swagger';
-import { UpdateProductSwaggerConfig } from '@api/config/swagger/product/update-product.swagger';
-import ProductRepository from '@datasource/typeorm/repositories/product.repository';
+import CreateProductDto from '../../../api/dtos/product/create-product.dto';
+import UpdateProductBodyDto from '../../../api/dtos/product/update-product.dto';
+import { CreateProductSwaggerConfig } from '../../config/swagger/product/create-product.swagger';
+import { DeleteProductSwaggerConfig } from '../../config/swagger/product/delete-product.swagger';
+import { FindAllProductsSwaggerConfig } from '../../config/swagger/product/find-all-products.swagger';
+import { FindProductByIdSwaggerConfig } from '../../config/swagger/product/find-product-by-id.swagger';
+import { FindProductsByCategorySwaggerConfig } from '../../config/swagger/product/find-products-by-category.swagger';
+import { UpdateProductSwaggerConfig } from '../../config/swagger/product/update-product.swagger';
+import ProductRepository from '../../../externals/datasource/typeorm/repositories/product.repository';
 import {
   Body,
   Controller,
@@ -20,18 +20,26 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import ProductController from 'adapters/controllers/product.controller';
-import ProductEntity from 'core/entities/product.entity';
+import ProductController from '../../../adapters/controllers/product.controller';
+import ProductEntity from '../../../core/entities/product.entity';
 import { UUID } from 'crypto';
-import {AdminGuard} from "../../../api/validators/admin-guard";
+import ProductGateway from "../../../adapters/gateways/product.gateway";
+import ProductUseCase from "../../../core/usecases/product.usecase";
+import { AdminGuard } from "../../validators/admin-guard";
+import ProductCategory from "../../../core/enums/product-category.enum";
 
 @ApiTags('products')
 @Controller('products')
 @UseGuards(AdminGuard)
 export default class ProductRoute {
+  private readonly _productGateway = new ProductGateway(
+      this._productRepository
+    );
+  private readonly _productUseCase = new ProductUseCase(this._productGateway);
   private readonly _productController = new ProductController(
-    this._productRepository
+    this._productUseCase
   );
+
   constructor(private _productRepository: ProductRepository) {}
 
   @Get('/:productId')
@@ -63,7 +71,7 @@ export default class ProductRoute {
   @Get('/by-category/:productCategory')
   @FindProductsByCategorySwaggerConfig()
   async findByCategory(
-    {category}: { category: any }
+    @Param("productCategory") category: ProductCategory,
   ): Promise<ProductEntity[]> {
     try {
       return await this._productController.findProductsByCategory(category);
