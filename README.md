@@ -1,46 +1,16 @@
-<p align="center">
-  <img src="https://i.ibb.co/nM93Y6b/Novo-Projeto.png" alt="Pos-tech logo">
-</p>
-<h1 align="center">🍔🥤🍨 Sistema de autoatendimento de Fast Food 🍨🥤🍔</h1>
+<h1 align="start"> Microsserviço de autenticação para acesso as rotas </h1>
 
+### Coverage:
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=7SOAT_tech-challenge-admin&metric=coverage)](https://sonarcloud.io/summary/new_code?id=7SOAT_tech-challenge-admin)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=7SOAT_tech-challenge-admin&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=7SOAT_tech-challenge-admin)
 
-<h2 id="sobre-o-projeto"> :pencil: Sobre o projeto</h2>
+<h2 id="sobre-o-projeto">Sobre o microsserviço de autenticação</h2>
 
 <p align="justify">
-  Esse projeto consiste na criação de um sistema back-end para controle de pedidos de fast food, visando resolver possíveis gargalos entre os atendentes e a cozinha de um restaurante. A solução contempla o processo de escolha do pedido pelo cliente, o pagamento, o acompanhamento das etapas de preparação e entrega.
+  Este microsserviço foca na parte de autenticação de um token para as chamadas dentro das rotas de produtos.
 </p>
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-<h2>🎥 Vídeo de apresentação da estrutura e funcionamento</h2>
 
-[<img src="https://cdn-icons-png.flaticon.com/512/4404/4404094.png" width=70>](https://drive.google.com/file/d/1dqtiporn2JohNH0ULhKmseoZUKHcd2DY/view?usp=drive_link)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-<h2>🎥 Vídeo sobre infraestrutura em cloud (AWS)</h2>
-
-[<img src="https://cdn-icons-png.flaticon.com/512/4404/4404094.png" width=70>](https://drive.google.com/drive/u/0/folders/13cednbUegCMEEQxIiqef6je6HTAj3qna)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-<h2>📄 Documentação do projeto</h2>
-
-[<img src="https://i.pinimg.com/originals/36/98/41/369841848d679cef173ae2b0f5ed6e39.png" width=115 >](https://miro.com/welcomeonboard/ZXM3dDZEMWNYazBaZEcxMDQ4UGFSOHRUVUZhcjJsTHZDVEJuMUhkeUl3d2ZnTndZUmhncUxRbEJlYVVxREN4b3wzNDU4NzY0NTg2NjE5MjYzNTE1fDI=?share_link_id=439093219851)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-<h2 id="requisitos"> 📃 Dependências</h2>
-
-<p align="justify">
-  Para rodar o projeto localmente, primeiro você precisa se certificas que possui essas ferramentas insaladas:
-</p>
-
-* [NodeJS e NPM](https://nodejs.org/en)
-* [Docker](https://www.docker.com/products/docker-desktop/)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 <h2>🏗️ Estrutura do projeto</h2>
 
 ```
@@ -60,23 +30,29 @@ src
 |   ├── usecases
 ├── externals
 |   ├── datasource
-|   ├── providers
+|     ├── typeorm
 ├── package
 |   ├── interfaces
 |   ├── models
 ├── app.module.ts
 ├── bootstrap.ts
 └── main.ts
+├── tests
+|  ├── auth-interceptor
+|  ├── controller
+|  ├── features
+|  ├── routes
+└──├─── usecases
 ```
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
 <h2 id="requisitos"> ⚙️ Rodando o projeto</h2>
 
 <ol start="1">
   <li>
     <h3>Clonando o repositório</h3>
 
-    git clone https://github.com/7SOAT/tech-challenge-monolith.git
-    cd tech-challenge-monolith
+    git clone https://github.com/7SOAT/tech-challenge-admin.git
+    cd tech-challenge-admin
   </li>
   <li>
     <h3>Instalar bibliotecas</h3>
@@ -98,13 +74,16 @@ src
      docker compose up --build
 
 
-  Disponível em <link>http://localhost:3000</link>
+  <li>
+    <h3>Testar aplicação</h3>
+    <p>Execute o seguinte comando para fazer os testes com coverage do microsserviço:</p>
+
+    jest --coverage
+  </li>
 
   </li>
-  <li>Subindo a imagem, o projeto já estará pronto para receber requisições através do Postman ou Insomnia</li>
 </ol>
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <h2 id="requisitos"> 👤 Integrantes</h2>
 
