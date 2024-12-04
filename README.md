@@ -3,6 +3,9 @@
 </p>
 <h1 align="center">🍔🥤🍨 Sistema de autoatendimento de Fast Food 🍨🥤🍔</h1>
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=7SOAT_tech-challenge-admin&metric=coverage)](https://sonarcloud.io/summary/new_code?id=7SOAT_tech-challenge-admin)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=7SOAT_tech-challenge-admin&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=7SOAT_tech-challenge-admin)
+
 <h2 id="sobre-o-projeto"> :pencil: Sobre o projeto</h2>
 
 <p align="justify">
