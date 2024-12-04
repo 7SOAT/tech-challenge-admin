@@ -20,12 +20,12 @@ export class AdminGuard implements CanActivate {
     try {
       const payload = decodeJwt(bearerToken);
       if (!payload.isAdmin) {
-        throw new ForbiddenException('You do not have permission to access this resource');
+        throw new UnauthorizedException('Unauthorized');
       }
       (request as Request & { user: any }).user = payload;
       return true;
     } catch (error) {
-      throw new UnauthorizedException('Invalid token');
+      throw new UnauthorizedException('Unauthorized');
     }
   }
 }

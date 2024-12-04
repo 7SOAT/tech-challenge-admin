@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import DatabaseConfig from '@interfaces/config/database.config';
+import DatabaseConfig from '../../../package/interfaces/config/database.config';
 
 @Injectable()
 export default class EnvironmentConfigService implements DatabaseConfig{

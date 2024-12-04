@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import ProductCategory from 'core/enums/product-category.enum';
+import ProductCategory from '../../../core/enums/product-category.enum';
 
 export default class CreateProductDto {
   @IsNotEmpty({ message: 'Product category should be not empty' })

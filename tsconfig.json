@@ -1,20 +1,5 @@
 {
   "compilerOptions": {
-    "paths": {
-      "@api/*": ["./api/*"],
-      "@routes/*": ["./api/routes/*"],
-      "@gateways/*": ["./adapters/gateways/*"],
-      "@usecases/*": ["./core/usecases/*"],
-      "@entities/*": ["./core/entities/*"],
-      "@enums/*": ["./core/enums/*"],
-      "@interfaces/*": ["./package/interfaces/*"],
-      "@type/*": ["./core/types/*"],
-      "@datasource/*": ["./externals/datasource/*"],
-      "@providers/*": ["./externals/providers/*"],
-      "@config/*": ["./api/config/*"],
-      "@models/*": ["./package/models/*"],
-      "@repositories/*": ["./externals/datasource/typeorm/repositories/*"]
-    },
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

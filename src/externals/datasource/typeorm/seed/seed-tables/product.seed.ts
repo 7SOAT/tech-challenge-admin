@@ -1,6 +1,6 @@
 import ProductCategory from "../../../../../core/enums/product-category.enum";
 import ProductEntity from "../../../../../core/entities/product.entity";
-import ProductModel from "@models/product.model";
+import ProductModel from "../../../../../package/models/product.model";
 
 const ProductMockList: ProductEntity[] = [
     new ProductEntity("x-salada", "Pão crocante, alface, tomate, queijo e maionese da casa.", 25.5, ProductCategory.Burger, '00000000-0000-0000-0000-000000000001'),
